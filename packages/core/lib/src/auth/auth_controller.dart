@@ -26,9 +26,7 @@ class AuthController extends ResourceController {
   ///
   /// [authServer] is the isRequired authorization server that grants tokens.
   AuthController(this.authServer) {
-    acceptedContentTypes = [
-      ContentType("application", "x-www-form-urlencoded")
-    ];
+    acceptedContentTypes = [ContentType("application", "x-www-form-urlencoded")];
   }
 
   /// A reference to the [AuthServer] this controller uses to grant tokens.
@@ -67,12 +65,20 @@ class AuthController extends ResourceController {
     @Bind.query("code") String? authCode,
     @Bind.query("grant_type") String? grantType,
     @Bind.query("scope") String? scope,
+    @Bind.query("client_id") String? clientId,
+    @Bind.query("client_secret") String? clientSecret = "",
   }) async {
     AuthBasicCredentials basicRecord;
     try {
       basicRecord = _parser.parse(authHeader);
     } on AuthorizationParserException catch (_) {
-      return _responseForError(AuthRequestError.invalidClient);
+      if (clientId == null) {
+        return _responseForError(AuthRequestError.invalidClient);
+      } else {
+        basicRecord = AuthBasicCredentials()
+          ..username = clientId
+          ..password = clientSecret;
+      }
     }
 
     try {
