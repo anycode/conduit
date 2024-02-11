@@ -16,55 +16,133 @@ import 'serializable.dart';
 ///           }
 ///         }
 class Operation {
-  const Operation(this.method,
-      [String? pathVariable1,
-      String? pathVariable2,
-      String? pathVariable3,
-      String? pathVariable4])
-      : _pathVariable1 = pathVariable1,
+  const Operation(
+    this.method, [
+    String? pathVariable1,
+    String? pathVariable2,
+    String? pathVariable3,
+    String? pathVariable4,
+  ])  : _pathVariable1 = pathVariable1,
         _pathVariable2 = pathVariable2,
         _pathVariable3 = pathVariable3,
         _pathVariable4 = pathVariable4;
 
-  const Operation.get(
-      [String? pathVariable1,
-      String? pathVariable2,
-      String? pathVariable3,
-      String? pathVariable4])
-      : method = "GET",
+  const Operation.get([
+    String? pathVariable1,
+    String? pathVariable2,
+    String? pathVariable3,
+    String? pathVariable4,
+  ])  : method = "GET",
         _pathVariable1 = pathVariable1,
         _pathVariable2 = pathVariable2,
         _pathVariable3 = pathVariable3,
         _pathVariable4 = pathVariable4;
 
-  const Operation.put(
-      [String? pathVariable1,
-      String? pathVariable2,
-      String? pathVariable3,
-      String? pathVariable4])
-      : method = "PUT",
+  const Operation.put([
+    String? pathVariable1,
+    String? pathVariable2,
+    String? pathVariable3,
+    String? pathVariable4,
+  ])  : method = "PUT",
         _pathVariable1 = pathVariable1,
         _pathVariable2 = pathVariable2,
         _pathVariable3 = pathVariable3,
         _pathVariable4 = pathVariable4;
 
-  const Operation.post(
-      [String? pathVariable1,
-      String? pathVariable2,
-      String? pathVariable3,
-      String? pathVariable4])
-      : method = "POST",
+  const Operation.patch([
+    String? pathVariable1,
+    String? pathVariable2,
+    String? pathVariable3,
+    String? pathVariable4,
+  ])  : method = "PATCH",
         _pathVariable1 = pathVariable1,
         _pathVariable2 = pathVariable2,
         _pathVariable3 = pathVariable3,
         _pathVariable4 = pathVariable4;
 
-  const Operation.delete(
-      [String? pathVariable1,
-      String? pathVariable2,
-      String? pathVariable3,
-      String? pathVariable4])
-      : method = "DELETE",
+  const Operation.post([
+    String? pathVariable1,
+    String? pathVariable2,
+    String? pathVariable3,
+    String? pathVariable4,
+  ])  : method = "POST",
+        _pathVariable1 = pathVariable1,
+        _pathVariable2 = pathVariable2,
+        _pathVariable3 = pathVariable3,
+        _pathVariable4 = pathVariable4;
+
+  const Operation.copy([
+    String? pathVariable1,
+    String? pathVariable2,
+    String? pathVariable3,
+    String? pathVariable4,
+  ])  : method = "COPY",
+        _pathVariable1 = pathVariable1,
+        _pathVariable2 = pathVariable2,
+        _pathVariable3 = pathVariable3,
+        _pathVariable4 = pathVariable4;
+
+  const Operation.delete([
+    String? pathVariable1,
+    String? pathVariable2,
+    String? pathVariable3,
+    String? pathVariable4,
+  ])  : method = "DELETE",
+        _pathVariable1 = pathVariable1,
+        _pathVariable2 = pathVariable2,
+        _pathVariable3 = pathVariable3,
+        _pathVariable4 = pathVariable4;
+
+  const Operation.purge([
+    String? pathVariable1,
+    String? pathVariable2,
+    String? pathVariable3,
+    String? pathVariable4,
+  ])  : method = "PURGE",
+        _pathVariable1 = pathVariable1,
+        _pathVariable2 = pathVariable2,
+        _pathVariable3 = pathVariable3,
+        _pathVariable4 = pathVariable4;
+
+  const Operation.exec([
+    String? pathVariable1,
+    String? pathVariable2,
+    String? pathVariable3,
+    String? pathVariable4,
+  ])  : method = "EXEC",
+        _pathVariable1 = pathVariable1,
+        _pathVariable2 = pathVariable2,
+        _pathVariable3 = pathVariable3,
+        _pathVariable4 = pathVariable4;
+
+  const Operation.reset([
+    String? pathVariable1,
+    String? pathVariable2,
+    String? pathVariable3,
+    String? pathVariable4,
+  ])  : method = "RESET",
+        _pathVariable1 = pathVariable1,
+        _pathVariable2 = pathVariable2,
+        _pathVariable3 = pathVariable3,
+        _pathVariable4 = pathVariable4;
+
+  const Operation.lock([
+    String? pathVariable1,
+    String? pathVariable2,
+    String? pathVariable3,
+    String? pathVariable4,
+  ])  : method = "LOCK",
+        _pathVariable1 = pathVariable1,
+        _pathVariable2 = pathVariable2,
+        _pathVariable3 = pathVariable3,
+        _pathVariable4 = pathVariable4;
+
+  const Operation.unlock([
+    String? pathVariable1,
+    String? pathVariable2,
+    String? pathVariable3,
+    String? pathVariable4,
+  ])  : method = "UNLOCK",
         _pathVariable1 = pathVariable1,
         _pathVariable2 = pathVariable2,
         _pathVariable3 = pathVariable3,
@@ -78,8 +156,7 @@ class Operation {
 
   /// Returns a list of all path variables required for this operation.
   List<String> get pathVariables {
-    return [_pathVariable1, _pathVariable2, _pathVariable3, _pathVariable4]
-        .fold([], (acc, s) {
+    return [_pathVariable1, _pathVariable2, _pathVariable3, _pathVariable4].fold([], (acc, s) {
       if (s != null) {
         acc.add(s);
       }
