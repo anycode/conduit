@@ -23,7 +23,6 @@ Future cachePackages(
       );
       if (retry.exitCode != 0) {
         print("${res.stdout}");
-        print("${res.stderr}");
         throw StateError(
           "'pub cache' failed with the following message: ${res.stderr}",
         );
@@ -40,7 +39,7 @@ Future<Uri?> findGlobalPath() async {
     ["pub", "global", "list"],
     runInShell: true,
   );
-  RegExp regex = RegExp(r'^.*conduit.* at path "(/[^"]+)"$', multiLine: true);
+  RegExp regex = RegExp(r'conduit.* at path "(/[^"]+)"$', multiLine: true);
 
   Match? match = regex.firstMatch(res.stdout);
   if (match != null) {
@@ -57,10 +56,11 @@ Future<String?> findGlobalVersion() async {
     ["pub", "global", "list"],
     runInShell: true,
   );
-  RegExp lineRegex = RegExp(r'^conduit .*');
+  RegExp lineRegex = RegExp(r'conduit .*');
   RegExp versionRegex =
       RegExp(r'\d+\.\d+\.\d+(?:\.\d+)?(?:-[a-zA-Z\d]+(?:\.[a-zA-Z\d]+)*)?');
   Match? lineMatch = lineRegex.firstMatch(res.stdout);
+
   if (lineMatch != null) {
     Match? versionMatch = versionRegex.firstMatch(lineMatch.group(0)!);
     if (versionMatch != null) {

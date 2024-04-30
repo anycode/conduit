@@ -94,6 +94,7 @@ class CLIClient {
           devDependencies: {"test": "^1.21.6"},
           dependencyOverrides: {
             'fs_test_agent': {'path': join(project, '..', 'fs_test_agent')},
+            'conduit': {'path': join(project, '..', 'cli')},
             'conduit_codable': {'path': join(project, '..', 'codable')},
             'conduit_common': {'path': join(project, '..', 'common')},
             'conduit_config': {'path': join(project, '..', 'config')},
@@ -102,6 +103,7 @@ class CLIClient {
               'path': join(project, '..', 'isolate_exec')
             },
             'conduit_open_api': {'path': join(project, '..', 'open_api')},
+            'conduit_postgresql': {'path': join(project, '..', 'postgresql')},
             'conduit_password_hash': {
               'path': join(project, '..', 'password_hash')
             },

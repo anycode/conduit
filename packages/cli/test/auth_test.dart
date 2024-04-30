@@ -26,6 +26,7 @@ void main() {
         },
         dependencyOverrides: {
           'fs_test_agent': {'path': join(project, '..', 'fs_test_agent')},
+          'conduit': {'path': join(project, '..', 'cli')},
           'conduit_codable': {'path': join(project, '..', 'codable')},
           'conduit_common': {'path': join(project, '..', 'common')},
           'conduit_config': {'path': join(project, '..', 'config')},
@@ -35,6 +36,7 @@ void main() {
           'conduit_password_hash': {
             'path': join(project, '..', 'password_hash')
           },
+          'conduit_postgresql': {'path': join(project, '..', 'postgresql')},
           'conduit_runtime': {'path': join(project, '..', 'runtime')},
         },
       ),

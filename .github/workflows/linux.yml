@@ -11,16 +11,19 @@ concurrency:
 
 jobs:
   smoke:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        sdk: [stable, main]
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: dart-lang/setup-dart@v1
       with:
-        sdk: dev
+        sdk: ${{ matrix.sdk }}
     - name: Setup Conduit
       run: |
-        dart pub global activate -spath packages/cli
         dart pub global activate melos
+        dart pub global activate -spath packages/cli
         melos cache-source
     - name: Run tests
       working-directory: ../
@@ -36,10 +39,12 @@ jobs:
       startsWith(github.head_ref, 'feature/')
       || startsWith(github.head_ref, 'fix/')
       || startsWith(github.head_ref, 'refactor/')
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         runner_args: [melos test-unit, dart tool/generated_test_runner.dart]
+        sdk: [stable, main]
     env:
       TEST_DIR: packages/core
     services:
@@ -54,10 +59,10 @@ jobs:
         ports:
           - 15432:5432
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: dart-lang/setup-dart@v1
         with:
-          sdk: dev
+          sdk: ${{ matrix.sdk }}
       - name: Get Dependencies
         run: |
           dart pub global activate -spath packages/cli

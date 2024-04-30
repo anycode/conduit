@@ -102,7 +102,8 @@ class CodeAnalyzer {
     return _getFileAstRoot(fileUri)
         .declarations
         .whereType<ClassDeclaration>()
-        .where((c) => c.extendsClause?.superclass.name2.value() == superclassName)
+        .where((c) =>
+            c.extendsClause?.superclass.name2.toString() == superclassName)
         .toList();
   }
 

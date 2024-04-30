@@ -20,10 +20,10 @@ jobs:
       || startsWith(github.event.head_commit.message, 'revert')
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: dart-lang/setup-dart@v1
       with:
-        sdk: stable
+        sdk: main
     - name: Prepare pub credentials
       run: |
         mkdir "$XDG_CONFIG_HOME/dart"
@@ -33,31 +33,17 @@ jobs:
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
     - name: Install melos
-      run: dart pub global activate melos
-    - name: Format
-      run: dart fix --apply && dart format --fix .
+      run: |
+        cat pubspec.yaml
+        dart pub global activate melos
     - name: Uptick versions
-      run: melos version --yes
+      run: melos sync-version
     - name: Changelog
       run: git diff --unified=0 $GITHUB_SHA packages/cli/CHANGELOG.md | tail +6 | sed -e 's/^\+//' > CHANGES.txt
     - name: Cache Source
       run: melos cache-source
     - name: Publish package
       run: melos publish --no-dry-run --git-tag-version --yes
-    - name: Push tags
-      uses: CasperWA/push-protected@v2
-      with:
-        token: ${{ secrets.CONDUIT_PAT }}
-        tags: true
-        branch: master
-    - name: Compute the release tag
-      run: |
-        echo "release_tag=v`cat packages/cli/pubspec.yaml | sed -nre 's/^version: [^0-9]*(([0-9]+\.)*[0-9]+).*/\1/p'`" >> $GITHUB_ENV
-    - name: Release
-      uses: softprops/action-gh-release@v1
-      with:
-        tag_name: ${{ env.release_tag }}
-        body_path: CHANGES.txt
   docker:
     if: |
       startsWith(github.event.head_commit.message, 'feat')
@@ -68,7 +54,7 @@ jobs:
       || startsWith(github.event.head_commit.message, 'revert')
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Compute the release tag
       run: |
         echo "release_tag=v`cat packages/cli/pubspec.yaml | sed -nre 's/^version: [^0-9]*(([0-9]+\.)*[0-9]+).*/\1/p'`" >> $GITHUB_ENV
