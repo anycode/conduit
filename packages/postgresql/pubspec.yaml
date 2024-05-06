@@ -1,16 +1,19 @@
 name: conduit_postgresql
 description: The postgresql ORM for conduit.
-version: 5.0.3
+version: 5.0.3+ac
 home: https://www.theconduit.dev
 repository: https://github.com/conduit-dart/conduit
 issue_tracker: https://github.com/conduit-dart/conduit/issues
+publish_to: https://pub.anycode.dev
 
 environment:
   sdk: ">=3.3.0 <4.0.0"
 
 dependencies:
   collection: ^1.17.1
-  conduit_core: ^5.0.3
+  conduit_core:
+    version: ^5.0.3+ac
+    hosted: https://pub.anycode.dev
   postgres: ^3.1.1
 
 dev_dependencies:
