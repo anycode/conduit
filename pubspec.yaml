@@ -3,6 +3,8 @@ version: 5.1.3
 home: https://www.theconduit.dev
 repository: https://github.com/conduit-dart/conduit
 issue_tracker: https://github.com/conduit-dart/conduit/issues
+description: Conduit workspace
+publish_to: https://pub.anycode.dev
 
 environment:
   sdk: ">=3.4.0 <4.0.0"
