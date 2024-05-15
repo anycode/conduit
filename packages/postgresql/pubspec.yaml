@@ -1,6 +1,6 @@
 name: conduit_postgresql
 description: The postgresql ORM for conduit.
-version: 5.0.3+ac
+version: 5.0.4+ac
 home: https://www.theconduit.dev
 repository: https://github.com/conduit-dart/conduit
 issue_tracker: https://github.com/conduit-dart/conduit/issues
