@@ -75,6 +75,10 @@
  - **FEAT**: sort predicate ([#203](https://github.com/conduit-dart/conduit/issues/203)). ([1f51879c](https://github.com/conduit-dart/conduit/commit/1f51879c26a37e4671206a79b2f319629173f046))
  - **FEAT**: Prepping for orm ([#190](https://github.com/conduit-dart/conduit/issues/190)). ([e82dfa6f](https://github.com/conduit-dart/conduit/commit/e82dfa6f6fc70a3a41f7e832fbf787a15343266d))
 
+## 5.0.4
+
+- **FEAT**: Allow passing `sslMode` to `PostgreSQLPersistentStore`
+
 ## 5.0.3
 
  - **REFACTOR**: ci and code quality ([#222](https://github.com/conduit-dart/conduit/issues/222)). ([d6e60631](https://github.com/conduit-dart/conduit/commit/d6e606315f55e851b80237984cd6082c4abfbdc2))
