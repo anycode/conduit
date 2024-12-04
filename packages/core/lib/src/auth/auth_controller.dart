@@ -26,9 +26,7 @@ class AuthController extends ResourceController {
   ///
   /// [authServer] is the isRequired authorization server that grants tokens.
   AuthController(this.authServer) {
-    acceptedContentTypes = [
-      ContentType("application", "x-www-form-urlencoded")
-    ];
+    acceptedContentTypes = [ContentType("application", "x-www-form-urlencoded")];
   }
 
   /// A reference to the [AuthServer] this controller uses to grant tokens.
