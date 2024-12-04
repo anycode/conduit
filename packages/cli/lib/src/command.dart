@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'dart:async';
 import 'dart:io';
 import 'dart:mirrors';
@@ -177,6 +175,10 @@ abstract class CLICommand {
         'The value "$val" for argument "$key" could not be coerced to a $T.',
       );
     }
+  }
+
+  List<String> decodeMulti(String key) {
+    return _argumentValues.multiOption(key);
   }
 
   T? _orElse<T>(T? Function()? orElse) {

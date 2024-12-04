@@ -26,7 +26,7 @@ import 'package:conduit_codable/src/resolver.dart';
 ///         final json = json.encode(archive);
 ///
 class KeyedArchive extends Object
-    with MapMixin<String, dynamic>
+    with MapBase<String, dynamic>
     implements Referencable {
   /// Use [unarchive] instead.
   KeyedArchive(this._map) {
@@ -118,15 +118,17 @@ class KeyedArchive extends Object
     if (schema == null) {
       return;
     }
-
+    if (_casted) return;
+    _casted = true;
     final caster = cast.Keyed(schema);
     _map = caster.cast(_map);
 
     if (_objectReference != null) {
-      // todo: can optimize this by only running it once
       _objectReference!._map = caster.cast(_objectReference!._map);
     }
   }
+
+  bool _casted = false;
 
   /// store the [key]/[value] pair into the map
   @override
@@ -160,7 +162,7 @@ class KeyedArchive extends Object
     return out;
   }
 
-  dynamic _getValue(String? key) {
+  dynamic _getValue(String key) {
     if (_map.containsKey(key)) {
       return _map[key];
     }
@@ -319,7 +321,7 @@ class KeyedArchive extends Object
 
   /* encode */
 
-  Map<String?, dynamic>? _encodedObject(Coding? object) {
+  Map<String, dynamic>? _encodedObject(Coding? object) {
     if (object == null) {
       return null;
     }
@@ -389,11 +391,8 @@ class KeyedArchive extends Object
   ///
   /// This invokes [Coding.encode] on each value in [value] and adds the map of objects
   /// to this archive for the key [key].
-  void encodeObjectMap<T extends Coding?>(String key, Map<String, T>? value) {
-    if (value == null) {
-      return;
-    }
-
+  void encodeObjectMap<T extends Coding>(String key, Map<String, T?>? value) {
+    if (value == null) return;
     final object = KeyedArchive({});
     value.forEach((k, v) {
       object[k] = _encodedObject(v);

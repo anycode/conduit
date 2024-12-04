@@ -51,7 +51,7 @@ class Build {
     final pubspecMap = <String, Object>{
       'name': 'runtime_target',
       'version': '1.0.0',
-      'environment': {'sdk': '>=3.3.0 <4.0.0'},
+      'environment': {'sdk': '>=3.4.0 <4.0.0'},
       'dependency_overrides': {}
     };
     final overrides = pubspecMap['dependency_overrides'] as Map;
@@ -115,7 +115,6 @@ class Build {
     print("Fetching dependencies (--offline --no-precompile)...");
     await getDependencies();
     print("Finished fetching dependencies.");
-
     if (!context.forTests) {
       print("Compiling...");
       await compile(context.targetScriptFileUri, context.executableUri);
@@ -147,6 +146,8 @@ class Build {
       [
         "compile",
         "exe",
+        ...(context.environment?.entries.map((e) => "-D${e.key}=${e.value}") ??
+            []),
         "-v",
         srcUri.toFilePath(windows: Platform.isWindows),
         "-o",
@@ -156,6 +157,7 @@ class Build {
           .toFilePath(windows: Platform.isWindows),
       runInShell: true,
     );
+
     if (res.exitCode != 0) {
       throw StateError(
         "'dart2native' failed with the following message: ${res.stderr}",
