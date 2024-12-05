@@ -72,7 +72,7 @@ class AuthController extends ResourceController {
     try {
       basicRecord = _parser.parse(authHeader);
     } on AuthorizationParserException {
-      if (clientId == null) {
+      if (clientId == null || clientSecret == null) {
         return _responseForError(AuthRequestError.invalidClient);
       } else {
         basicRecord = AuthBasicCredentials()
