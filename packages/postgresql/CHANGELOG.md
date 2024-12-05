@@ -1,3 +1,7 @@
+## 5.1.3+ac
+
+ - **FIX**: depend on AC patched core pkg
+
 ## 5.1.3
 
  - **REFACTOR**(cli): Change build source to bin/main.dart ([#231](https://github.com/conduit-dart/conduit/issues/231)). ([e9f43ede](https://github.com/conduit-dart/conduit/commit/e9f43ede8eb2a7700f00872c68edbb17a0390548))
